@@ -26,7 +26,7 @@ python3 -m http.server 8000
 
 Everything below is placeholder copy and should be swapped for real information before launch.
 
-- **Address, phone, email** appear in the header menu, footer, and `contact.html`. Search for `123 Builder Street`, `312 555 0148`, and `hello@builtpoint.com`.
+- **Address, phone, email** appear in the header menu, footer, and `contact.html`. Search for `123 Builder Street`, `312 555 0148`, and `hello@builtpointconstruction.com`.
 - **Team members** live in `team.html`. Each `.member` button carries `data-name`, `data-role`, and `data-bio`, which feed the bio modal. Drop headshots into `assets/team/` and point each `<img>` at the file. Square images (at least 800×800) work best.
 - **Projects** live in `projects.html` and the featured block in `index.html`. Replace the SVGs in `assets/projects/` with photos (4:3 or wider, 1600px+ wide) and set `data-type` to `residential`, `commercial`, `mixed-use`, or `renovation` for the filters.
 - **Stats** in the home hero use `data-count` for the count-up animation.
