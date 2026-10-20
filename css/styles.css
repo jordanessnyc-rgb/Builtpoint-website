@@ -607,3 +607,13 @@ body.menu-open .menu__links a:nth-child(6) { transition-delay: .25s; }
 @media (max-width: 899px) {
   .hero__mark { right: -34vw; top: 2vh; width: 70vw; opacity: .55; }
 }
+
+/* Phones: shorter headshot in the team modal so the name and bio show at once,
+   and leader photos that don't span the full screen width */
+@media (max-width: 719px) {
+  .modal__photo { aspect-ratio: 16 / 10; }
+  .modal__photo img { object-position: center 25%; }
+}
+@media (max-width: 599px) {
+  .leader__photo { max-width: 75%; }
+}
