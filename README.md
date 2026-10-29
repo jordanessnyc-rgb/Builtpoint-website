@@ -35,11 +35,12 @@ Everything below is placeholder copy and should be swapped for real information 
 
 ## Make the forms submit
 
-The contact and newsletter forms are front-end demos: they show a success message without sending anything. To go live, connect a form service and remove the `data-demo` attribute from the `<form>` tag:
+The contact form, vendor application, and newsletter signup post JSON to the endpoint set at the top of `js/main.js`:
 
-- **Formspree:** set `action="https://formspree.io/f/YOUR_ID"` and `method="post"`.
-- **Netlify Forms:** add `netlify` and `name="contact"` attributes to the form.
-- **Basin, Getform, etc.:** set `action` to the endpoint they give you.
+- **Web3Forms (default):** create a free access key at web3forms.com using the inbox that should receive submissions, then set `FORM_KEY`.
+- **Formspree:** set `FORM_ENDPOINT` to your form's URL (`https://formspree.io/f/YOUR_ID`) and leave `FORM_KEY` empty.
+
+Until a key or endpoint is set, the forms run in demo mode: they show their success message without sending anything. Each form's email subject is set with `data-subject` on the `<form>` tag, and a hidden honeypot field filters bots.
 
 ## Brand
 

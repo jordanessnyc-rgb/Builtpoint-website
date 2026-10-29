@@ -107,17 +107,59 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('is-open')) close(); });
   }
 
-  /* Forms: progressive enhancement. Point the form's action at Formspree,
-     Netlify Forms, Basin, etc. and remove data-demo to submit for real. */
-  $$('form[data-demo]').forEach((form) => {
-    form.addEventListener('submit', (e) => {
+  /* Forms ----------------------------------------------------------------
+     Submissions are sent as JSON to FORM_ENDPOINT. Works with Web3Forms
+     (set FORM_KEY to the access key) or Formspree (set FORM_ENDPOINT to the
+     form's URL and leave FORM_KEY empty). While FORM_ENDPOINT is empty the
+     forms run in demo mode and only show their success message. */
+  const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+  const FORM_KEY = '';
+
+  $$('form[data-form]').forEach((form) => {
+    const status = $('.form__status', form) || form.nextElementSibling;
+    const button = $('button[type="submit"]', form);
+    const show = (text, isError) => {
+      if (!status || !status.classList.contains('form__status')) return;
+      status.textContent = text;
+      status.classList.toggle('is-error', !!isError);
+      status.classList.add('is-visible');
+    };
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const status = $('.form__status', form) || form.nextElementSibling;
-      if (status && status.classList.contains('form__status')) {
-        status.textContent = form.dataset.success || 'Thanks — we’ll be in touch shortly.';
-        status.classList.add('is-visible');
+      if ($('[name="botcheck"]', form)?.checked) return; // honeypot
+      const live = FORM_ENDPOINT && (FORM_KEY || !FORM_ENDPOINT.includes('web3forms'));
+      if (!live) {
+        console.warn('Form submission not configured: set FORM_ENDPOINT / FORM_KEY in js/main.js');
+        show(form.dataset.success || 'Thanks. We’ll be in touch shortly.');
+        form.reset();
+        return;
       }
-      form.reset();
+      const data = {};
+      new FormData(form).forEach((v, k) => { data[k] = data[k] ? data[k] + ', ' + v : v; });
+      delete data.botcheck;
+      if (FORM_KEY) data.access_key = FORM_KEY;
+      data.subject = form.dataset.subject || 'New website submission';
+      data.from_name = 'BuiltPoint website';
+      const label = button ? button.innerHTML : '';
+      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.success !== false) {
+          show(form.dataset.success || 'Thanks. We’ll be in touch shortly.');
+          form.reset();
+        } else {
+          show(json.message || 'Something went wrong. Please email us at hello@builtpointconstruction.com.', true);
+        }
+      } catch (err) {
+        show('We couldn’t send your message. Please email us at hello@builtpointconstruction.com.', true);
+      } finally {
+        if (button) { button.disabled = false; button.innerHTML = label; }
+      }
     });
   });
 
