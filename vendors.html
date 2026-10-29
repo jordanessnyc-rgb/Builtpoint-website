@@ -157,7 +157,8 @@
           <div class="info-block mt-2"><span class="label">Questions</span><a href="mailto:hello@builtpointconstruction.com?subject=Vendor%20inquiry">hello@builtpointconstruction.com</a></div>
           <div class="info-block"><span class="label">Phone</span><a href="tel:+19293051099">929-305-1099</a></div>
         </div>
-        <form class="form reveal" data-delay="1" data-demo data-success="Thanks. We've received your application and will follow up with pre-qualification documents within a few business days." action="#" method="post">
+        <form class="form reveal" data-delay="1" data-form data-subject="New vendor application from the website" data-success="Thanks. We've received your application and will follow up with pre-qualification documents within a few business days." action="#" method="post">
+          <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form__row">
             <div class="field"><label for="v-company">Company name</label><input id="v-company" name="company" type="text" required autocomplete="organization"></div>
             <div class="field"><label for="v-contact">Contact name</label><input id="v-contact" name="contact" type="text" required autocomplete="name"></div>
@@ -299,7 +300,8 @@
       <div class="newsletter">
         <h4 class="footer__col-title" style="font-size:.75rem;letter-spacing:.22em;color:var(--mute-light)">Stay in the loop</h4>
         <p>Project updates, openings, and news from the field. No spam.</p>
-        <form data-demo data-success="Subscribed. Welcome aboard.">
+        <form data-form data-subject="Newsletter signup from the website" data-success="Subscribed. Welcome aboard.">
+          <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="sr-only" for="nl-email">Email address</label>
           <input id="nl-email" type="email" name="email" placeholder="Your email" required>
           <button type="submit">Join</button>

@@ -296,7 +296,8 @@
       <div class="newsletter">
         <h4 class="footer__col-title" style="font-size:.75rem;letter-spacing:.22em;color:var(--mute-light)">Stay in the loop</h4>
         <p>Project updates, openings, and news from the field. No spam.</p>
-        <form data-demo data-success="Subscribed. Welcome aboard.">
+        <form data-form data-subject="Newsletter signup from the website" data-success="Subscribed. Welcome aboard.">
+          <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="sr-only" for="nl-email">Email address</label>
           <input id="nl-email" type="email" name="email" placeholder="Your email" required>
           <button type="submit">Join</button>
