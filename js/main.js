@@ -113,7 +113,7 @@
      form's URL and leave FORM_KEY empty). While FORM_ENDPOINT is empty the
      forms run in demo mode and only show their success message. */
   const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
-  const FORM_KEY = '';
+  const FORM_KEY = '3e18fa05-beae-4de3-9ce9-1eb76a39a272';
 
   $$('form[data-form]').forEach((form) => {
     const status = $('.form__status', form) || form.nextElementSibling;
